@@ -1,6 +1,6 @@
 # Problem Statement
 
-During high-demand booking windows — such as India's IRCTC tatkal booking rush, flight sale windows, or exam registration — large numbers of users attempt to book the same limited set of seats within seconds of each other. A naively implemented booking system can suffer from a race condition, where the "check if available" and "mark as booked" steps are not atomic, allowing more than one user to successfully book the same seat. This is a well-documented class of concurrency bug that affects real-world booking and inventory systems at scale.
+During high-demand booking windows such as India's IRCTC tatkal booking rush, flight sale windows, or exam registration where large numbers of users attempt to book the same limited set of seats within seconds of each other. A naively implemented booking system can suffer from a race condition, where the "check if available" and "mark as booked" steps are not atomic, allowing more than one user to successfully book the same seat. This is a well-documented class of concurrency bug that affects real-world booking and inventory systems at scale.
 
 # Scope
 
