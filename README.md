@@ -29,6 +29,17 @@ When multiple users try to book the same seat simultaneously, a naive booking sy
    ![Class Diagram](diagrams/class-diagram.png)
    ![Sequence Diagram](diagrams/sequence-diagram.png)
 
+   ## Test Results Summary
+
+| Test | Scenario | Result |
+|---|---|---|
+| UnsafeBookingTest | 5 threads vs. 1 seat, no synchronization | Race condition confirmed — up to 5 successful bookings recorded for a single seat |
+| SafeBookingTest | 5 threads vs. 1 seat, with synchronization | Exactly 1 successful booking every run, 10+ consecutive runs |
+| Booking rush (CLI) | 8 threads vs. 1 seat | 1 booked, 7 correctly waitlisted |
+| Cancellation + auto-promotion | Cancel booked seat with active waitlist | Next customer in queue auto-booked correctly |
+| Invalid seat number | Book seat 98 (doesn't exist) | Rejected gracefully via InvalidSeatException |
+| Empty customer name | Book with blank name | Rejected gracefully via InvalidBookingRequestException |
+
 ## Tech Stack
 
 - Java (JDK 17+ required; built and tested with JDK 25)
