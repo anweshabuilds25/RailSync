@@ -11,15 +11,21 @@ public class BookingSystemSafe {
 
     public BookingSystemSafe(Train train) {
         this.train = train;
+        // ConcurrentHashMap instead of HashMap because concurrent .put()
+        // calls from multiple threads can corrupt a plain HashMap's
+        // internal structure - this was actually observed while testing
+        // the unsafe version, where .size() returned incorrect values
         this.bookings = new ConcurrentHashMap<>();
         this.waitlists = new HashMap<>();
 
-        // Initialize an empty waitlist queue for every seat up front
         for (Seat s : train.getSeats()) {
             waitlists.put(s.getSeatNumber(), new LinkedList<>());
         }
     }
 
+    // synchronized is the actual fix here: only one thread can execute
+    // this method at a time on this object, so no other thread can slip
+    // in between the availability check and the booking step
     public synchronized void bookSeat(Customer customer, int seatNumber) throws SeatNotAvailableException, InvalidSeatException {
         Seat targetSeat = findSeat(seatNumber);
 
@@ -43,6 +49,9 @@ public class BookingSystemSafe {
         }
     }
 
+    // This calls the synchronized bookSeat() method above, from within
+    // another synchronized method on the same object - Java's locks are
+    // reentrant, so this is safe and won't deadlock
     public synchronized void bookOrWaitlist(Customer customer, int seatNumber) throws InvalidSeatException {
         Seat targetSeat = findSeat(seatNumber);
 
@@ -76,7 +85,8 @@ public class BookingSystemSafe {
             (cancelledBooking != null ? cancelledBooking.getCustomer().getName() : "unknown customer") +
             " on seat " + seatNumber);
 
-        // Auto-assign the next waiting customer, if any
+        // Waitlist is a Queue specifically because it's first-come,
+        // first-served - whoever asked first gets the seat first
         Queue<Customer> queue = waitlists.get(seatNumber);
         if (!queue.isEmpty()) {
             Customer nextCustomer = queue.poll();
@@ -84,7 +94,6 @@ public class BookingSystemSafe {
                 bookSeat(nextCustomer, seatNumber);
                 System.out.println(nextCustomer.getName() + " auto-assigned seat " + seatNumber + " from waitlist.");
             } catch (SeatNotAvailableException e) {
-                // Should not happen since we just freed the seat, but handled defensively
                 System.out.println("Unexpected: could not assign waitlisted customer.");
             }
         }

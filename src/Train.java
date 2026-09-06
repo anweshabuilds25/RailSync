@@ -30,6 +30,9 @@ public class Train {
         return route;
     }
 
+    // Returning the live list here is a deliberate simplification for this
+    // project's scope — only individual Seat objects are mutated
+    // concurrently, not this list itself, so it's safe as-is
     public List<Seat> getSeats() {
         return seats;
     }

@@ -1,6 +1,8 @@
 public class Seat {
     private final int seatNumber;
     private final String seatClass;
+    // volatile ensures every thread sees the latest booking status
+    // immediately, instead of a stale cached copy
     private volatile boolean isBooked;
 
     public Seat(int seatNumber, String seatClass) {

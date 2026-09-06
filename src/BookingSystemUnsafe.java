@@ -17,9 +17,13 @@ public class BookingSystemUnsafe {
             throw new InvalidSeatException("Seat " + seatNumber + " does not exist on this train.");
         }
 
-        // --- THE DANGER ZONE: check and act are two separate steps ---
+        // This is the race condition: checking availability and marking
+        // it booked are two separate steps here, with nothing stopping
+        // two threads from both passing the check before either books
         if (!targetSeat.isBooked()) {
-            // Artificial delay to make the race condition easy to observe
+            // Small artificial delay so the race condition is reliably
+            // observable during testing, rather than an inconsistent
+            // one-in-a-million occurrence
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
