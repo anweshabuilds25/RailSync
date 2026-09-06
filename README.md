@@ -24,7 +24,7 @@ When multiple users try to book the same seat simultaneously, a naive booking sy
 
    ## Diagrams
 
-   ### Use Case Diagram
+### Use Case Diagram
 ![Use Case Diagram](diagrams/use-case-diagram.png)
 
 ### Workflow Diagram
