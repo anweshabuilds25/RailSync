@@ -2,11 +2,11 @@
 
 RailSync is a console-based Java application that simulates a high-demand train ticket booking rush (similar to IRCTC's tatkal booking window), where multiple customers attempt to book the same limited seats at the same time.
 
-The project demonstrates a real, well-known class of software bug — the **race condition** — by first showing it happen in an unsynchronized booking engine, then fixing it using Java's `synchronized` keyword. It also includes a waitlist system with automatic seat reassignment on cancellation.
+The project demonstrates a real, well-known class of software bug, the **race condition**, by first showing it happen in an unsynchronized booking engine, then fixing it using Java's `synchronized` keyword. It also includes a waitlist system with automatic seat reassignment on cancellation.
 
 ## Problem Statement
 
-When multiple users try to book the same seat simultaneously, a naive booking system can incorrectly allow more than one booking to succeed for a single seat — a bug that has affected real booking platforms at scale. RailSync demonstrates:
+When multiple users try to book the same seat simultaneously, a naive booking system can incorrectly allow more than one booking to succeed for a single seat which is a bug that has affected real booking platforms at scale. RailSync demonstrates:
 
 1. The bug occurring in an unsynchronized implementation (`BookingSystemUnsafe`)
 2. The fix using proper synchronization (`BookingSystemSafe`)
