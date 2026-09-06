@@ -22,6 +22,13 @@ When multiple users try to book the same seat simultaneously, a naive booking sy
 - Custom exception handling for invalid input and unavailable seats
 - Simulated booking rush demo (8 concurrent customers vs. 1 seat)
 
+   ## Diagrams
+
+   ![Use Case Diagram](diagrams/use-case-diagram.png)
+   ![Workflow Diagram](diagrams/workflow-diagram.png)
+   ![Class Diagram](diagrams/class-diagram.png)
+   ![Sequence Diagram](diagrams/sequence-diagram.png)
+
 ## Tech Stack
 
 - Java (JDK 17+ required; built and tested with JDK 25)
