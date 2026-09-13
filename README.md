@@ -103,13 +103,13 @@ cd RailSync
 
 ```
 cd src
-javac *.java
+javac (Get-ChildItem -Recurse -Filter *.java | ForEach-Object { $_.FullName })
 ```
 
 ### 4. Run the application
 
 ```
-java Main
+java com.railsync.Main
 ```
 
 ## Usage
@@ -132,12 +132,12 @@ java Main
 ## Demonstrating the Race Condition (Optional, for evaluation)
 
 ```
-java UnsafeBookingTest
+java com.railsync.demo.UnsafeBookingTest
 ```
 Run multiple times — you may see more than one "successfully booked" message for the same seat.
 
 ```
-java SafeBookingTest
+java com.railsync.demo.SafeBookingTest
 ```
 This should consistently show exactly one successful booking every time.
 
