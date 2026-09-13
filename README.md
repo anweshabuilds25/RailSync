@@ -58,21 +58,30 @@ When multiple users try to book the same seat simultaneously, a naive booking sy
 ```
 RailSync/
 ├── src/
-│   ├── Main.java
-│   ├── Seat.java
-│   ├── Train.java
-│   ├── Customer.java
-│   ├── Booking.java
-│   ├── BookingSystemUnsafe.java
-│   ├── BookingSystemSafe.java
-│   ├── SeatNotAvailableException.java
-│   ├── InvalidSeatException.java
-│   ├── InvalidBookingRequestException.java
-│   ├── RaceConditionDemo.java
-│   ├── UnsafeBookingTest.java
-│   └── SafeBookingTest.java
+│   └── com/
+│       └── railsync/
+│           ├── Main.java
+│           ├── model/
+│           │   ├── Seat.java
+│           │   ├── Train.java
+│           │   ├── Customer.java
+│           │   └── Booking.java
+│           ├── exception/
+│           │   ├── SeatNotAvailableException.java
+│           │   ├── InvalidSeatException.java
+│           │   └── InvalidBookingRequestException.java
+│           ├── service/
+│           │   ├── BookingSystemUnsafe.java
+│           │   └── BookingSystemSafe.java
+│           └── demo/
+│               ├── RaceConditionDemo.java
+│               ├── UnsafeBookingTest.java
+│               └── SafeBookingTest.java
+├── diagrams/
 ├── screenshots/
-└── README.md
+├── README.md
+└── statement.md
+
 ```
 
 ## Prerequisites
