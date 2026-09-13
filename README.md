@@ -2,11 +2,11 @@
 
 RailSync is a console-based Java application that simulates a high-demand train ticket booking rush (similar to IRCTC's tatkal booking window), where multiple customers attempt to book the same limited seats at the same time.
 
-The project demonstrates a real, well-known class of software bug — the **race condition** — by first showing it happen in an unsynchronized booking engine, then fixing it using Java's `synchronized` keyword. It also includes a waitlist system with automatic seat reassignment on cancellation.
+The project demonstrates a real, well-known class of software bug, the **race condition**, by first showing it happen in an unsynchronized booking engine, then fixing it using Java's `synchronized` keyword. It also includes a waitlist system with automatic seat reassignment on cancellation.
 
 ## Problem Statement
 
-When multiple users try to book the same seat simultaneously, a naive booking system can incorrectly allow more than one booking to succeed for a single seat — a bug that has affected real booking platforms at scale. RailSync demonstrates:
+When multiple users try to book the same seat simultaneously, a naive booking system can incorrectly allow more than one booking to succeed for a single seat which is a bug that has affected real booking platforms at scale. RailSync demonstrates:
 
 1. The bug occurring in an unsynchronized implementation (`BookingSystemUnsafe`)
 2. The fix using proper synchronization (`BookingSystemSafe`)
@@ -40,7 +40,7 @@ When multiple users try to book the same seat simultaneously, a naive booking sy
 
 | Test | Scenario | Result |
 |---|---|---|
-| UnsafeBookingTest | 5 threads vs. 1 seat, no synchronization | Race condition confirmed — up to 5 successful bookings recorded for a single seat |
+| UnsafeBookingTest | 5 threads vs. 1 seat, no synchronization | Race condition confirmed and up to 5 successful bookings recorded for a single seat |
 | SafeBookingTest | 5 threads vs. 1 seat, with synchronization | Exactly 1 successful booking every run, 10+ consecutive runs |
 | Booking rush (CLI) | 8 threads vs. 1 seat | 1 booked, 7 correctly waitlisted |
 | Cancellation + auto-promotion | Cancel booked seat with active waitlist | Next customer in queue auto-booked correctly |
@@ -134,7 +134,7 @@ java com.railsync.Main
 ```
 java com.railsync.demo.UnsafeBookingTest
 ```
-Run multiple times — you may see more than one "successfully booked" message for the same seat.
+Run multiple times and you may see more than one "successfully booked" message for the same seat.
 
 ```
 java com.railsync.demo.SafeBookingTest
